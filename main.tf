@@ -44,42 +44,33 @@ provider "aws" {
 }
 
 # Wstawiamy ARN istniejacej roli IAM na sztywno
-locals {
+
+module "sns" {
+  source = "./modules/sns"
+  sns_name = "Sensor_mail"
+}
+
+module "dynamodb" {
+  source = "./modules/dynamodb"
+  table_name = "SensorStatus"
+}
+
+module "lambda" {
+  source = "./modules/lambda"
+  lambda_zip  = "${path.module}/lambda.zip"
+  function_name = "sensor_temperature_lambda"
   lambda_role_arn = "arn:aws:iam::708429773842:role/LabRole"
+  handler = "lambda_function.lambda_handler"
 }
 
-resource "aws_sns_topic" "sensor_mail" {
-  name = "Sensor_mail"
+output "sns_topic_arn" {
+  value = module.sns.sns_topic_arn
 }
 
-resource "aws_dynamodb_table" "sensor_terra" {
-  name         = "SensorTerra"
-  billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "sensor_id"
-
-  attribute {
-    name = "sensor_id"
-    type = "N"
-  }
+output "dynamodb_table_name" {
+  value = module.dynamodb.dynamodb_table_name
 }
 
-data "archive_file" "lambda_zip" {
-  type        = "zip"
-  source_dir  = "${path.module}/lambda"
-  output_path = "${path.module}/lambda.zip"
-}
-
-resource "aws_lambda_function" "sensor_function" {
-  filename         = data.archive_file.lambda_zip.output_path
-  function_name    = "sensor_temperature_lambda"
-  role             = local.lambda_role_arn
-  handler          = "lambda_function.lambda_handler"
-  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-  runtime          = "python3.12"
-  timeout          = 10
-  environment {
-    variables = {
-      AWS_NODE_ENV = "production"
-    }
-  }
+output "lambda_function_name" {
+  value = module.lambda.lambda_function_name
 }
