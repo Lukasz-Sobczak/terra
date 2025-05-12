@@ -8,6 +8,12 @@ resource "aws_lambda_function" "sensor_function" {
   timeout          = 10
 }
 
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "${path.module}/lambda"      # katalog z kodem
+  output_path = "${path.module}/lambda.zip"  # wyjściowy zip
+}
+
 output "lambda_function_name" {
   value = aws_lambda_function.sensor_function.function_name
 }
