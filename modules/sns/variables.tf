@@ -1,5 +1,4 @@
-variable "sns_name" {
+variable "topic_name" {
+  description = "Nazwa tematu SNS"
   type        = string
-  description = "The name of the SNS topic"
-  default     = "Sensor_mail"
 }

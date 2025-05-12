@@ -1,5 +1,17 @@
 variable "table_name" {
+  description = "Nazwa tabeli DynamoDB"
   type        = string
-  description = "The name of the DynamoDB table"
-  default     = "SensorTerra"
+}
+
+variable "hash_key" {
+  description = "Klucz partycji tabeli DynamoDB"
+  type        = string
+}
+
+variable "attributes" {
+    description = "Atrybuty tabeli"
+    type = list(object({
+      name = string
+      type = string
+    }))
 }

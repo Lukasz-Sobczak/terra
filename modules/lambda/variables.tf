@@ -1,20 +1,29 @@
-variable "lambda_zip" {
-  type        = string
-  description = "Path to the lambda deployment zip"
-}
-
 variable "function_name" {
+  description = "Nazwa funkcji Lambda"
   type        = string
-  description = "The name of the Lambda function"
 }
 
 variable "lambda_role_arn" {
+  description = "ARN roli IAM dla Lambda"
   type        = string
-  description = "The ARN of the Lambda execution role"
 }
 
 variable "handler" {
+  description = "Handler funkcji Lambda"
   type        = string
-  description = "The handler of the Lambda function"
-  default     = "lambda_function.lambda_handler"
+}
+
+variable "runtime" {
+  description = "Runtime funkcji Lambda"
+  type        = string
+}
+
+variable "timeout" {
+  description = "Timeout funkcji Lambda"
+  type        = number
+}
+
+variable "source_dir" {
+  description = "Ścieżka do katalogu ze źródłem Lambdy"
+  type = string
 }
