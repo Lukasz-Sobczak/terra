@@ -1,5 +1,5 @@
 .terraform/
 *.zip
+*.exe
 terraform.tfstate
 terraform.tfstate.*
-.crc
