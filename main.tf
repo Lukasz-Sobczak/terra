@@ -52,7 +52,7 @@ module "sns" {
 
 module "dynamodb" {
   source = "./modules/dynamodb"
-  table_name = "SensorStatus"
+  table_name = "SensorTerra"
 }
 
 module "lambda" {
