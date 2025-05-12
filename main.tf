@@ -62,15 +62,3 @@ module "lambda" {
   lambda_role_arn = "arn:aws:iam::708429773842:role/LabRole"
   handler = "lambda_function.lambda_handler"
 }
-
-output "sns_topic_arn" {
-  value = module.sns.sns_topic_arn
-}
-
-output "dynamodb_table_name" {
-  value = module.dynamodb.dynamodb_table_name
-}
-
-output "lambda_function_name" {
-  value = module.lambda.lambda_function_name
-}
