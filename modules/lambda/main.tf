@@ -10,9 +10,10 @@ resource "aws_lambda_function" "sensor_function" {
 
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_dir  = path.module
+  source_dir  = "${path.module}/lambda/lambda"
   output_path = "${path.module}/lambda.zip"
 }
+
 
 output "lambda_function_name" {
   value = aws_lambda_function.sensor_function.function_name
