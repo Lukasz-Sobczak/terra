@@ -17,7 +17,7 @@ locals {
 }
 
 resource "aws_secretsmanager_secret" "db_password" {
-  name        = "db_password"
+  name        = "db_password_v5"
   description = "Hasło do bazy danych "
 }
 
@@ -32,17 +32,17 @@ resource "aws_secretsmanager_secret_version" "db_password_version" {
 
 module "sns_topic" {
   source = "./modules/sns_topic"
-  topic_name = "Sensor_mail"
+  topic_name = "Sensor_mail_v5"
 }
 
 module "sensor_table" {
   source = "./modules/sensor_table"
-  table_name = "SensorTerra_v2"
+  table_name = "SensorTerra_v5"
 }
 
 module "lambda_function" {
   source           = "./modules/lambda_function"
-  function_name    = "sensor_temperature_lambda_v3"
+  function_name    = "sensor_temperature_lambda_v5"
   lambda_role_arn  = local.lambda_role_arn
   source_dir       = "${path.module}/lambda"
   runtime          = "python3.12"
