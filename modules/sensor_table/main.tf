@@ -8,5 +8,3 @@ resource "aws_dynamodb_table" "sensor" {
     type = "N"
   }
 }
-
-variable "table_name" {}
