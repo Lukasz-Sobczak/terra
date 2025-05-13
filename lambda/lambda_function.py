@@ -54,7 +54,7 @@ def lambda_handler(event, context):
         status = {"status": "TEMPERATURE TOO LOW"}
     elif T_celsius < 100:
         status = {"status": "OK"}
-    elif T_celsius < 250:
+    elif T_celsius < 240:
         status = {"status": "TEMPERATURE TOO HIGH"}
     else:
         status = {"status": "TEMPERATURE CRITICAL"}
