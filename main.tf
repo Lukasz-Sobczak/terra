@@ -16,10 +16,7 @@ locals {
   lambda_role_arn = "arn:aws:iam::708429773842:role/LabRole"
 }
 
-module "dynamodb_lock" {
-  source = "./modules/dynamodb_lock"
-  table_name = "terraform-lock-table"
-}
+
 
 module "sns_topic" {
   source = "./modules/sns_topic"
@@ -28,12 +25,12 @@ module "sns_topic" {
 
 module "sensor_table" {
   source = "./modules/sensor_table"
-  table_name = "SensorTerra"
+  table_name = "SensorTerra_v2"
 }
 
 module "lambda_function" {
   source           = "./modules/lambda_function"
-  function_name    = "sensor_temperature_lambda_v2"
+  function_name    = "sensor_temperature_lambda_v3"
   lambda_role_arn  = local.lambda_role_arn
   source_dir       = "${path.module}/lambda"
   runtime          = "python3.12"
