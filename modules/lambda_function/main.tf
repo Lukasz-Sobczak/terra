@@ -16,6 +16,7 @@ resource "aws_lambda_function" "sensor" {
   environment {
     variables = {
       AWS_NODE_ENV = "production"
+      SECRET_ARN = aws_secretsmanager_secret.db_password.arn
     }
   }
 }

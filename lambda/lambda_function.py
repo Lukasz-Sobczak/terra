@@ -1,6 +1,7 @@
 import json
 import math
 import boto3
+import os
 
 def lambda_handler(event, context):
     # Stałe dla równania Steinhart–Harta
@@ -14,6 +15,15 @@ def lambda_handler(event, context):
     table = dynamodb.Table("SensorTerra")
     topic_arn = "arn:aws:sns:us-east-1:708429773842:Sensor_mail"
     
+
+
+    secret_arn = os.environ["SECRET_ARN"]
+    client = boto3.client('secretsmanager')
+    response = client.get_secret_value(SecretId=secret_arn)
+    secret = json.loads(response['SecretString'])
+
+    db_user = secret["username"]
+    db_pass = secret["password"]
     # Pobranie danych z JSON
     try:
         data = json.loads(event["body"]) if "body" in event else event
@@ -54,6 +64,8 @@ def lambda_handler(event, context):
     
     # Zwrócenie wyniku
     return {
+        "user": db_user,
+        "haslo": db_pass,
         "sensor_id": sensor_id,
         "temperature_C": round(T_celsius, 2),
         **status
