@@ -52,7 +52,7 @@ def lambda_handler(event, context):
         table.put_item(Item={"sensor_id": sensor_id, "broken": True})
     elif T_celsius < 20:
         status = {"status": "TEMPERATURE TOO LOW"}
-    elif T_celsius < 100:
+    elif T_celsius < 103:
         status = {"status": "OK"}
     elif T_celsius < 254:
         status = {"status": "TEMPERATURE TOO HIGH"}
