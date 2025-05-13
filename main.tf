@@ -1,7 +1,7 @@
 provider "aws" {
   region = "us-east-1"
 }
-/*
+
 terraform {
   backend "s3" {
     bucket         = "wiaderkozestanemterra"
@@ -11,7 +11,7 @@ terraform {
     encrypt        = true
   }
 }
-*/
+
 locals {
   lambda_role_arn = "arn:aws:iam::708429773842:role/LabRole"
 }
