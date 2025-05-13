@@ -7,4 +7,8 @@ resource "aws_dynamodb_table" "sensor" {
     name = "sensor_id"
     type = "N"
   }
+   lifecycle {
+    prevent_destroy = true
+    ignore_changes  = all
+  }
 }

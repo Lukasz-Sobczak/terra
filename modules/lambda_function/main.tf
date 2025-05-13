@@ -19,5 +19,9 @@ resource "aws_lambda_function" "sensor" {
       SECRET_ARN = var.secret_arn
     }
   }
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes  = all
+  }
 }
 
