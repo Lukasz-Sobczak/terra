@@ -1,7 +1,7 @@
 provider "aws" {
   region = "us-east-1"
 }
-
+/*
 terraform {
   backend "s3" {
     bucket         = "wiaderkozestanemterra"
@@ -11,14 +11,9 @@ terraform {
     encrypt        = true
   }
 }
-
+*/
 locals {
   lambda_role_arn = "arn:aws:iam::708429773842:role/LabRole"
-}
-
-module "s3_backend" {
-  source = "./modules/s3_backend"
-  bucket_name = "wiaderkozestanemterra"
 }
 
 module "dynamodb_lock" {
@@ -38,7 +33,7 @@ module "sensor_table" {
 
 module "lambda_function" {
   source           = "./modules/lambda_function"
-  function_name    = "sensor_temperature_lambda"
+  function_name    = "sensor_temperature_lambda_v2"
   lambda_role_arn  = local.lambda_role_arn
   source_dir       = "${path.module}/lambda"
   runtime          = "python3.12"
