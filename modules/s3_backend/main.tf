@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "s3_bucket" {
+resource "aws_s3_bucket" "terraform_state" {
   bucket = var.bucket_name
 
   versioning {
@@ -17,3 +17,5 @@ resource "aws_s3_bucket" "s3_bucket" {
     prevent_destroy = true
   }
 }
+
+variable "bucket_name" {}
