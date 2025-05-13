@@ -47,4 +47,5 @@ module "lambda_function" {
   source_dir       = "${path.module}/lambda"
   runtime          = "python3.12"
   handler          = "lambda_function.lambda_handler"
+  secret_arn = aws_secretsmanager_secret.db_password.arn
 }
