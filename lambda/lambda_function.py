@@ -16,7 +16,8 @@ def lambda_handler(event, context):
     topic_arn = "arn:aws:sns:us-east-1:708429773842:Sensor_mail"
     
 
-
+    #Hasło nie jest uzywane do żadnej bazy danych
+    #Wyświetlam je na wyjściu, żeby pokazać, że secretsmanager działa
     secret_arn = os.environ["SECRET_ARN"]
     client = boto3.client('secretsmanager')
     response = client.get_secret_value(SecretId=secret_arn)
